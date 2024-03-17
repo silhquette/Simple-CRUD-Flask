@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Dashboard Admin</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+  </head>
+  <body>
+    <div class="max-w-5xl mx-auto py-12 flex-col flex">
+      <h1 class="text-2xl font-semibold">Home</h1>
+      <h3 class="text-md text-gray-600">
+        List of user accounts. Please exercise caution when managing accounts
+        that belong to other users.
+      </h3>
+      <a
+        class="px-14 py-2 mt-8 rounded-md bg-indigo-600 text-white inline-block w-fit"
+        href="{{ url_for('create') }}"
+        >Add User</a
+      >
+      <table class="table-auto w-full mt-12">
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Username</th>
+            <th>Email</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for user in users %}
+          <tr class="border-y">
+            <td class="p-4 text-center">{{ user.0 }}</td>
+            <td class="p-4">{{ user.1 }}</td>
+            <td class="p-4">{{ user.2 }}</td>
+            <td class="p-4 flex gap-4 justify-center">
+              <a
+                class="px-4 py-2 rounded-md bg-indigo-600 text-white inline-block"
+                href="{{ url_for('edit', id = user.0) }}"
+                >Edit</a
+              >
+              <form
+                action="{{ url_for('destroy', id = user.0) }}"
+                method="post"
+              >
+                <input type="hidden" name="id" value="{{ user.0 }}" />
+                <button
+                  type="submit"
+                  class="px-4 py-2 rounded-md bg-red-700 text-white inline-block"
+                >
+                  Delete
+                </button>
+              </form>
+            </td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  </body>
+</html>
