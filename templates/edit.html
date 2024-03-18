@@ -44,6 +44,13 @@
                       placeholder="janesmith"
                     />
                   </div>
+                  {% if form.username.errors %}
+                  <ul class="errors">
+                    {% for error in form.username.errors %}
+                    <li class="text-red-500">{{ error }}</li>
+                    {% endfor %}
+                  </ul>
+                  {% endif %}
                 </div>
               </div>
 
@@ -64,6 +71,13 @@
                   />
                   <input type="hidden" name="id" value="{{ user.0 }}" />
                 </div>
+                {% if form.email.errors %}
+                <ul class="errors">
+                  {% for error in form.email.errors %}
+                  <li class="text-red-500">{{ error }}</li>
+                  {% endfor %}
+                </ul>
+                {% endif %}
               </div>
             </div>
           </div>

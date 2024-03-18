@@ -44,6 +44,13 @@
                     />
                   </div>
                 </div>
+                {% if form.username.errors %}
+                <ul class="errors">
+                  {% for error in form.username.errors %}
+                  <li class="text-red-500">{{ error }}</li>
+                  {% endfor %}
+                </ul>
+                {% endif %}
               </div>
 
               <div class="sm:col-span-4">
@@ -61,6 +68,13 @@
                     class="block w-full rounded-md border-0 py-1.5 px-3 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                   />
                 </div>
+                {% if form.email.errors %}
+                <ul class="errors">
+                  {% for error in form.email.errors %}
+                  <li class="text-red-500">{{ error }}</li>
+                  {% endfor %}
+                </ul>
+                {% endif %}
               </div>
 
               <div class="sm:col-span-4">
@@ -78,6 +92,13 @@
                     class="block w-full rounded-md border-0 py-1.5 px-3 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                   />
                 </div>
+                {% if form.password.errors %}
+                <ul class="errors">
+                  {% for error in form.password.errors %}
+                  <li class="text-red-500">{{ error }}</li>
+                  {% endfor %}
+                </ul>
+                {% endif %}
               </div>
             </div>
           </div>
