@@ -66,27 +66,16 @@ def edit(id):
 
 @app.route('/user/edit', methods=['POST'])
 def update():
+    # Catch data
+    username = request.form['username']
+    email = request.form['email']
     user_id = request.form['id']
 
     cur = __mysql.connection.cursor()
-    cur.execute("SELECT * FROM users WHERE id = %s", (user_id))
-    data = cur.fetchall()
-    cur.close()
+    cur.execute("UPDATE users SET username = %s, email = %s WHERE id = %s", (username, email, user_id))
+    __mysql.connection.commit()
 
-    form = UserForm(request.form)
-
-    if form.validate():
-        # Catch data
-        username = request.form['username']
-        email = request.form['email']
-
-        cur = __mysql.connection.cursor()
-        cur.execute("UPDATE users SET username = %s, email = %s WHERE id = %s", (username, email, user_id))
-        __mysql.connection.commit()
-        
-        return redirect(url_for('dashboard'))
-    else:
-        return render_template('edit.html', user=data[0], form = form)
+    return redirect(url_for('dashboard'))
 
 @app.route('/user/delete/<id>', methods=['POST'])
 def destroy(id):
